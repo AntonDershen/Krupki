@@ -1,0 +1,51 @@
+﻿@using Project.Methods
+@model List<Leader>
+@{
+    ViewBag.Title = I18n.Leadership;
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr/>
+@if (HttpContext.Current.User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-offset-5">
+            <a class="btn btn-success col-md-4" href='@Url.Action("AddLeader","Leadership")'>
+                <i class="glyphicon glyphicon-plus"></i> @I18n.Add
+            </a>
+        </div>
+    </div>
+    <hr />
+}
+
+<div class="list-group col-lg-10 col-lg-offset-1">
+    @foreach (var leader in Model)
+    {
+        <div class="list-group-item">
+            <div class="row">
+                <div class="col-md-4">
+                    <img class="img-thumbnail" src='@leader.PhotoUrl' width="300px" />
+                </div>
+                <div class="col-md-7">
+                    <div class="col-md-12">
+                        <label><b>@leader.LastName</b></label>
+                        <label><i>@leader.FirstName</i></label>
+                        <label><i>@leader.MiddleName</i></label>
+                        <small>(<b>@LeadershipMethods.ParsePosition(leader.Position)</b>)</small>
+                    </div>
+                    <div class="col-md-12">
+                        <label>@Html.Markdown(leader.Description)</label>
+                    </div>
+                </div>
+                @if (HttpContext.Current.User.IsInRole("Admin"))
+                {
+                    <div class="col-md-1 text-center ">
+                        <a href='@Url.Action("RemoveLeader","Leadership", new {leaderId = leader.Id})'>
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

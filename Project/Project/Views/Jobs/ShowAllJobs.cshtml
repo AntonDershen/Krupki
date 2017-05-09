@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = I18n.Jobs;
+}
+@model List<Jobs>
+<h2 class="text-center">@ViewBag.Title</h2>
+@if (HttpContext.Current.User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-offset-5">
+            <a class="btn btn-success col-md-4"href='@Url.Action("AddJobs","Jobs")'>
+                <i class="glyphicon glyphicon-plus"></i> @I18n.Add
+            </a>
+        </div>
+    </div>
+    <hr/>
+}
+<div class="list-group col-lg-10 col-lg-offset-1">
+    @foreach (var jobs in Model)
+    {
+        <div class="list-group-item">
+            <div class="row">
+                <a href="@Url.Action("ShowJobs","Jobs",new {@jobsId=jobs.Id})">
+                    <div class="col-md-10" style="word-wrap: break-word; font-size: 20px">
+                        <span>@jobs.Header</span>
+                    </div>
+                    <b class="col-md-1">
+                        @jobs.Date.ToShortDateString()
+                    </b>
+                </a>
+                @if (HttpContext.Current.User.IsInRole("Admin"))
+                {
+                    <div class="col-md-1 text-center">
+                        <a href='@Url.Action("RemoveJobs", "Jobs",new {jobsId = jobs.Id})'>
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

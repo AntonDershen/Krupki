@@ -1,0 +1,43 @@
+﻿@model List<Document>
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr/>
+
+@if (HttpContext.Current.User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-offset-5">
+            <a class="btn btn-success col-md-4"href='@Url.Action("AddDocument","Documents", new {type = ViewBag.DocsType})'>
+                <i class="glyphicon glyphicon-plus"></i> @I18n.Add
+            </a>
+        </div>
+    </div>
+    <hr/>
+}
+<div class="list-group col-lg-12">
+    @foreach (var document in Model)
+    {
+        <div class="list-group-item">
+            <div class="row">
+                <div class="col-md-10" style="word-wrap: break-word; font-size:20px">
+                    <a href='@Url.Action("DownloadDocument",new {documentId = document.Id})'>
+
+                        <span class=" glyphicon glyphicon-download"></span>
+                    </a>
+                    <span>@document.Description</span>
+                </div>
+                <b class="col-md-1">
+                    @document.Date.ToShortDateString()
+                </b>
+                @if (HttpContext.Current.User.IsInRole("Admin"))
+                {
+                    <div class="col-md-1 text-center ">
+                        <a href='@Url.Action("RemoveDocument", new {documentId = document.Id})'>
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

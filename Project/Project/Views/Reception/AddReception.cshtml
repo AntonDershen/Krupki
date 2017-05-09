@@ -1,0 +1,28 @@
+﻿@model ReceptionsView
+@{
+    ViewBag.Title = I18n.ElectronicReception; 
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+@using (Html.BeginForm("AddReception", "Reception", FormMethod.Post,
+    new {@class = "form-horizontal", role = "form", enctype = "multipart/form-data"}))
+{
+         @Html.AntiForgeryToken();
+    if (ViewBag.type == "FL")
+    {
+        @Html.Partial("ReceptionsFL")
+    }
+    else
+    {
+        @Html.Partial("ReceptionsYL")
+    }
+
+    @Html.TextBoxFor(m => m.Type, new {@class = "form-control", @id = "Typ"});
+    }
+<script>
+    $(document).ready()
+    {
+        $('#Typ').val('@ViewBag.type');
+        $('#Typ').hide();
+    };
+</script>

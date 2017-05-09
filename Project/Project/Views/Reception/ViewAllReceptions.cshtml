@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = I18n.AllReception;
+}
+@model  List<Receptions>
+<h2 class="text-center">@ViewBag.Title</h2>
+@if (HttpContext.Current.User.IsInRole("Advisor")) {  
+<div class="list-group col-lg-10 col-lg-offset-1">
+    @foreach (var request in Model)
+    {
+        <div class="list-group-item">
+            <div class="row">
+                <a href="@Url.Action("RequestReception", "Reception", new { @receptionId = request.Id })">
+                    <div class="col-md-8" style="word-wrap: break-word; font-size: 20px">
+                        <span>@request.Name</span>
+                    </div>
+                    @if (request.Viewed == false && request.Answered == false) { 
+                    <b class="col-md-2">
+                        Добавлено
+                        @request.Date.ToShortDateString()
+                    </b>
+                    }
+                    @if (request.Viewed == true && request.Answered == false)
+                    {
+                        <b class="col-md-2">
+                            Просмотрено @request.Date.ToShortDateString()
+                        </b>
+                    }
+                    @if (request.Viewed == true && request.Answered == true)
+                    {
+                        <b class="col-md-2">
+                           Был дан ответ @request.DateReception.ToShortDateString()
+                        </b>
+                    }
+                </a>
+                <div class="col-md-2 text-center">
+                    <a href='@Url.Action("DeleteReception", "Reception", new { @receptionId = request.Id })'>
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+}

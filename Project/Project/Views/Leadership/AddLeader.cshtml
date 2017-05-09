@@ -1,0 +1,94 @@
+﻿@using System.Collections
+@using Project.Methods
+@model Project.Models.LeaderView
+@Styles.Render("~/Content/markdown")
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/markdown")
+}
+
+@using (Html.BeginForm("AddLeader", "Leadership", FormMethod.Post,
+    new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger text-center col-md-10 col-md-offset-1">
+            @Html.ValidationSummary()
+        </div>
+    }
+    <div class="form-horizontal">
+
+        <div class="col-md-offset-1 col-md-10">
+            <div class="input input--juro">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "input__field input__field--juro" })
+                <div class="input__label input__label--juro ">
+                    @Html.LabelFor(m => m.LastName, new { @class = "input__label-content input__label-content--juro" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-offset-1 col-md-10">
+            <div class="input input--juro">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "input__field input__field--juro" })
+                <div class="input__label input__label--juro ">
+                    @Html.LabelFor(m => m.FirstName, new { @class = "input__label-content input__label-content--juro" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-offset-1 col-md-10">
+            <div class="input input--juro">
+                @Html.TextBoxFor(m => m.MiddleName, new { @class = "input__field input__field--juro" })
+                <div class="input__label input__label--juro ">
+                    @Html.LabelFor(m => m.MiddleName, new { @class = "input__label-content input__label-content--juro" })
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-offset-1 col-md-10">
+            <div class="input input--juro input--filled">
+                @Html.DropDownListFor(m => m.Position,
+                    new SelectList(new ArrayList { Positions.Director.ToString(),
+                        Positions.DeputyDirector.ToString(),
+                        Positions.Other.ToString()}),
+                    new { @class = "input__field input__field--juro" })
+                <div class="input__label input__label--juro ">
+                    @Html.LabelFor(m => m.Position, new { @class = "input__label-content input__label-content--juro" })
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-md-8 col-lg-offset-2">
+                <input id="imageInput" name="photo" class="form-control"
+                       type="file" title="@I18n.Field_Image" data-filename-placement="inside" />
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-12">
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control col-md-8" })
+            </div>
+        </div>
+        <hr/>
+        <div class="form-group">
+            <div class="col-md-8 col-lg-offset-2">
+                <input type="submit" class="btn btn-success btn-lg col-md-12" value="@I18n.Add" />
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+        $("#Description")["data-provider"] = "markdown-editable";
+        $("#Description").attr("placeholder",'@I18n.Field_Description');
+        $("#Description").markdown({
+            width: "col-md-8"
+        });
+        $('input[type=file]').bootstrapFileInput();
+        $('.file-inputs').bootstrapFileInput();
+    });
+
+</script>

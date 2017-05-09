@@ -1,0 +1,111 @@
+﻿<div class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand pull left" href="@Url.Action("Index", "Home")"><i class="glyphicon glyphicon-home"></i></a>
+        </div>
+        <div class="divider"></div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href='@Url.Action("OneWindow", "Static")'>
+                        @Resources.I18n.OneWindow
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+
+                        <li>
+                            <a href='@Url.Action("Show", "Documents", new {type = DocsTypes.Blank})'>@I18n.Blanks</a>
+                        </li>
+
+                        <li>
+                            <a href='@Url.Action("Procedure", "Static")'>@Resources.I18n.Procedure</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href='@Url.Action("ListOfServices", "Static")'>
+                        @Resources.I18n.Services
+                    </a>
+
+                </li>
+                <li class="dropdown">
+                    <a href='@Url.Action("AboutReception", "Reception")'>
+                        @Resources.I18n.ElectronicReception
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        @I18n.AboutUs
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href='@Url.Action("History", "Static")'>@Resources.I18n.HistoryPage</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("Show", "Leadership")'>@Resources.I18n.Leadership</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("Mode", "Static")'>@Resources.I18n.Mode</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("Reception", "Static")'>@Resources.I18n.Reception</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("ShowAllJobs", "Jobs")'>@Resources.I18n.Jobs</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("Dispatcher", "Static")'>@Resources.I18n.Dispatcher</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("Contacts", "Static")'>@Resources.I18n.Contacts</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        @Resources.I18n.Information
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href='@Url.Action("Show", "Documents", new {type = DocsTypes.File})'>@I18n.RegulatoryDocuments</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("SocialStandart", "Static")'>@Resources.I18n.SocialStandart</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("Rights", "Static")'>@Resources.I18n.Rights</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("Tarifs", "Static")'>@Resources.I18n.Tarifs</a>
+                        </li>
+                        <li>
+                            <a href='http://gkx.by/'>@Resources.I18n.Portal</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @Html.Partial("_LoginPartial")
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.nav li.dropdown').hover(function () {
+            $(this).addClass('open');
+        }, function () {
+            $(this).removeClass('open');
+        });
+    });
+</script>

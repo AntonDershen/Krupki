@@ -1,0 +1,63 @@
+﻿@model Statics
+   @if (Model != null)
+   {
+       ViewBag.Title = ViewBag.Header;
+       String[] body = ViewBag.Body;
+       int count = ViewBag.Size;
+       <h2 class="text-center">@ViewBag.Title</h2>
+       <hr/>
+       if (count > 0)
+       { 
+       <div class="col-lg-12" >@Html.Markdown(body[0])</div>
+           for (int i = 1; i < count; i += 2)
+           {
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title text-center">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#@i" aria-expanded="true" aria-controls="@i">
+                            @Html.Markdown(body[i])
+                        </a>
+                    </h4>
+                </div>
+                <div id="@i" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        @Html.Markdown(body[i + 1])
+                    </div>
+                </div>
+            </div>
+            </div>
+           }
+       }
+            }
+            @if (HttpContext.Current.User.IsInRole("Admin"))
+{
+                <hr />
+                <div class="row">
+                    <div class="col-md-offset-5">
+                        <a class="btn btn-success col-md-4" href='@Url.Action("Redactor","Static", new {@header=Model.Header})'>
+                            <i class="glyphicon glyphicon-plus"></i> @I18n.Redact
+                        </a>
+                    </div>
+                </div>
+
+}
+            <script>
+                function anichange(objName) {
+                    if ($(objName).css('display') == 'none') {
+                        $(objName).animate({ height: 'show' }, 400);
+                    } else {
+                        $(objName).animate({ height: 'hide' }, 200);
+                    }
+                }
+                $(document).ready(function () {
+                    $('img').each(function () {
+                        var div = $(document.createElement('div'))
+                        div.addClass('text-center');
+                        div.append($(this).clone());
+                        $(this).parent().append(div);
+                        $(this).remove();
+                       
+                    })
+                })
+            </script>

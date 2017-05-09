@@ -1,0 +1,17 @@
+﻿@model List<Project.Models.News>
+
+@foreach (var news in Model)
+{
+
+    <div class=" col-md-4  amazing-col amazing-img">
+        <div class="image">
+            <a class="some" href='@Url.Action("NewsView", "News", new {@newsId = news.Id})'>
+                <img class="" src="@news.ImageUrl" width="100%" />
+                <label class="h3_news">
+                    <span>@news.Header</span>
+                </label>
+            </a>
+        </div>
+    </div>
+
+}

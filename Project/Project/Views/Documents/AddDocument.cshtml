@@ -1,0 +1,46 @@
+﻿@using System.Collections
+@model DocumentsView
+
+<hr />
+@using (Html.BeginForm("AddDocument", "Documents", FormMethod.Post,
+    new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger text-center col-md-10 col-md-offset-1">
+            @Html.ValidationSummary()
+        </div>
+    }
+    <div class="col-md-offset-1 col-md-10">
+        <div class="input input--juro">
+            @Html.TextBoxFor(m => m.Description, new { @class = "input__field input__field--juro" })
+            <div class="input__label input__label--juro ">
+                @Html.LabelFor(m => m.Description, new { @class = "input__label-content input__label-content--juro" })
+            </div>
+        </div>
+    </div>
+    <input name="type" value="@ViewBag.DocsType" class="hidden"/>
+    <div class="form-group">
+        <div class="col-md-8 col-lg-offset-2">
+            <input name="file" class="form-control"
+                   type="file" title="@I18n.Document" data-filename-placement="inside" />
+            @Html.ValidationMessage(" ")
+        </div>
+    </div>
+    <hr/>
+    <div class="form-group">
+        <div class="col-md-8 col-lg-offset-2">
+            <input type="submit" class="btn btn-success btn-lg col-md-12" value="@I18n.Add" />
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function() {
+        $('input[type=file]').bootstrapFileInput();
+        $('.file-inputs').bootstrapFileInput();
+        
+    })
+</script>

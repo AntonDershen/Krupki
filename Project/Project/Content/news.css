@@ -1,0 +1,82 @@
+﻿.image {
+    position: relative;
+    margin: 1px;
+}
+
+.h2_news {
+	position	: absolute;
+	top		    : 20%;
+	left		: 5%;
+	width		: 100%;
+    color       : white;
+    cursor:pointer;
+}
+
+.h3_news {
+    z-index: 11;
+	position	: absolute;
+	top		    : 20%;
+	left		: 5%;
+	width		: 90%;
+    color       : white;
+    cursor:pointer;
+}
+.h3_news span {
+    padding		: 6px;
+	font			: bold 25px Helvetica, Sans-Serif;
+	letter-spacing  : -1px;
+}
+.news-date{
+    z-index: 11;
+    -moz-transition: opacity 1s ease-out; 
+    -o-transition: opacity 1s ease-out; 
+    -webkit-transition: opacity 1s ease-out; 
+    -ms-transition: opacity 1s ease-out; 
+    opacity: 0;
+    padding			: 6px;
+    position:inherit;
+    top: 120px;
+    margin-bottom:5px;
+	font			: bold 12px Helvetica, Sans-Serif;
+	letter-spacing  : -1px;
+}
+
+.h2_news span {
+    padding			: 6px;
+    box-shadow: 0 10px 20px #3E4156;
+    word-wrap: break-word;
+    max-height:100px;
+	font			: bold 30px/45px Helvetica, Sans-Serif;
+	letter-spacing  : -1px;
+	background		: rgba(0, 0, 0,0.7);
+}
+
+.amazing-col{
+    padding: 0px !important;
+}
+
+
+.some {
+    cursor: pointer;
+    z-index: 9;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+}
+.amazing-img:hover .some {
+    -moz-transition: opacity 0.2s ease-out; 
+    -o-transition: opacity 0.2s ease-out; 
+    -webkit-transition: opacity 0.2s ease-out; 
+    -ms-transition: opacity 0.2s ease-out;
+    opacity: 0.7;
+}
+
+.amazing-img:hover .news-date{
+    -moz-transition: opacity 0.4s ease-out; 
+    -o-transition: opacity 0.4s ease-out; 
+    -webkit-transition: opacity 0.4s ease-out;
+    -ms-transition: opacity 0.4s ease-out; 
+    opacity: 1;
+}

@@ -1,0 +1,23 @@
+﻿@model Jobs
+@if (Model == null)
+{
+    <h1 class="text-center text-danger">@I18n.JobsNotFound</h1>
+}
+else
+{
+    ViewBag.Title = Model.Header;
+    <h1 class="text-center">@Model.Header</h1>
+    <div class="col-lg-12">
+        <small class="col-lg-2"><b>@Model.Date</b></small>
+        @if (HttpContext.Current.User.IsInRole("Admin"))
+        {
+            @*<div class="col-lg-10">
+                <a href='@Url.Action("RemoveNews", "News", new {newsId = Model.Id})'>
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>*@
+        }
+    </div>
+    <hr />
+    <label class="col-lg-12">@Html.Markdown(Model.Body)</label>
+}

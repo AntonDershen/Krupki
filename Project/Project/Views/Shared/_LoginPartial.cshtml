@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNet.Identity
+
+    @if (Request.IsAuthenticated)
+    {
+        if (HttpContext.Current.User.IsInRole("Admin"))
+         {
+             <li>
+                 <a href='@Url.Action("AddNews", "News")'>
+                     <i class='glyphicon glyphicon-comment'></i>
+                 </a>
+             </li>
+         }
+         if (HttpContext.Current.User.IsInRole("Advisor"))
+         {
+             <li>
+                 <a href='@Url.Action("ViewAllReceptions", "Reception")'>
+                     <i class='glyphicon glyphicon-list-alt'></i>
+                 </a>
+             </li>
+         }
+         <li>
+             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm", @class = "hidden"}))
+             {
+                @Html.AntiForgeryToken()
+             }
+             <a href="javascript:document.getElementById('logoutForm').submit()">
+                 <i class="glyphicon glyphicon-off"></i>
+             </a>
+         </li>
+    }
+    else
+    {
+        <li>
+            <a href='' data-toggle="modal" data-target="#modalWindow" onclick="Load()">
+                <i class="glyphicon glyphicon-user"></i> 
+            </a>
+        </li>
+    }
+
+@Html.Partial("_ModalWindow")
+
+<script>
+    function Load() {
+        $.ajax({
+            url: '@Url.Action("Login","Account")',
+            success: function (view) {
+                $(".modal-content").html(view);
+            }
+        });
+    }
+</script>

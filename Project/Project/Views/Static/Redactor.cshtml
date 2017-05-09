@@ -1,0 +1,42 @@
+﻿@model Statics
+@Styles.Render("~/Content/markdown")
+@section Scripts {
+
+    @Scripts.Render("~/bundles/markdown")
+}
+@if (Model != null)
+{
+    ViewBag.Title = Model.Header;
+    <h2>@Model.Header</h2>
+
+    <hr/>
+  using (Html.BeginForm("Redactor", "Static", FormMethod.Post,
+     new {@class = "form-horizontal", role = "form", enctype = "multipart/form-data"}))
+ {
+     <div class="form-group">
+         <div class="col-md-offset-2 col-md-12">
+             @Html.TextAreaFor(m => m.Body, new {@class = "form-control col-md-8"})
+         </div>
+     </div>
+     @Html.TextBoxFor(m => m.Id, new {@class = "form-control", @id = "Id"});
+     <div class="form-group">
+         <div class="col-md-8 col-lg-offset-2">
+             <input type="submit" class="btn btn-success btn-lg col-md-12" value="@I18n.Add"/>
+         </div>
+     </div>
+ }
+}
+<script>
+    $('#Id').hide();
+    $('#Id').val('@Model.Id');
+    $(document).ready(function() {
+        $("#Body")["data-provider"] = "markdown-editable";
+        $("#Body").attr("placeholder",'@I18n.Field_Description');
+        $("#Body").markdown({
+            width: "col-md-8"
+        });
+        $('input[type=file]').bootstrapFileInput();
+        $('.file-inputs').bootstrapFileInput();
+    });
+
+</script>

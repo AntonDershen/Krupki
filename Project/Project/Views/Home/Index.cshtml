@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = @I18n.SiteHeader;
+}
+
+@Scripts.Render("~/bundles/owl")
+
+<h3 class="text-center alert" style="font-weight:bold">@I18n.SiteHeader</h3>
+<hr/>
+
+@{Html.RenderAction("ShowLastNews","News");}
+
+<script>
+    $(document).ready(function () {
+
+        $("#owl-demo").owlCarousel({
+
+            navigation: false,
+            slideSpeed: 300,
+            autoPlay: 5000,
+            paginationSpeed: 400,
+            singleItem: true,
+            pagination: false,
+            Transitions: true,
+            transitionStyle: "goDown"
+        });
+
+    });
+</script>
